@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate");
         setContentView(R.layout.activity_main);
         mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notification = (Button)findViewById(R.id.notification);
@@ -35,6 +37,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         FirebaseMessaging.getInstance().subscribeToTopic("news");
+
+        String token = FirebaseInstanceId.getInstance().getToken();
+        Log.d(TAG, "token:" + token);
     }
 
     @Override
